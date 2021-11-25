@@ -4,4 +4,8 @@ public interface LibrarianServices {
     public void removeUser();
 
     public void addBook();
+
+    public void viewBookStat();
+
+    public void changeStocks();
 }

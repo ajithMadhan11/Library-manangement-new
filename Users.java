@@ -6,6 +6,8 @@ abstract class Users {
         public static final int LIBRARIAN = 1;
         public static final int STAFF = 2;
         public static final int STUDENT = 3;
+        public static final int STUDENT_MAX_BOOK = 2;
+        public static final int STAFF_MAX_BOOK = 3;
     }
 
     protected String userId;
@@ -20,13 +22,9 @@ abstract class Users {
      * @param password the string password
      * @return returns true if the login is successful else returns false
      */
-    public boolean login(String userID, String password) {
-        if ((userID.equals(this.userId) && password.equals(this.password))) {
-            return true;
-        } else {
-            System.out.println("The username or password entered was not correct!");
-            return false;
-        }
+
+    public boolean checkCredentials(String userID, String password) {
+        return (userID.equals(this.userId) && password.equals(this.password)) ? true : false;
     }
 
     public abstract void viewReport();

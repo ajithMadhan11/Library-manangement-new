@@ -1,6 +1,7 @@
+
 import java.util.ArrayList;
 
-public class LibraryDatabase {
+public class LibraryDatabase implements LibraryServices {
 
     // Static fields to create unique userIDs
     static int lastStudnetId = 2004;
@@ -8,8 +9,8 @@ public class LibraryDatabase {
     static int lastStaffId = 3003;
 
     // users and books array.
-    ArrayList<Users> users;
-    ArrayList<Book> books;
+    private ArrayList<Users> users;
+    public ArrayList<Book> books;
 
     /**
      * Creating the constructor as private So that an instance of this class can't
@@ -22,11 +23,14 @@ public class LibraryDatabase {
         users = new ArrayList<Users>();
         books = new ArrayList<Book>();
         users.add(new Librarian("LB1001", "Admin", "Admin", Users.Constants.LIBRARIAN));
-        users.add(new Staff("SF3001", "Ashik", "staff123", Users.Constants.STAFF));
-        users.add(new Staff("SF3002", "Fathima", "staff123", Users.Constants.STAFF));
-        users.add(new Student("ST2001", "Ajith", "student123", Users.Constants.STUDENT));
-        users.add(new Student("ST2002", "Harsha", "student123", Users.Constants.STUDENT));
-        users.add(new Student("ST203", "Nivetha", "student123", Users.Constants.STUDENT));
+        users.add(new Staff("SF3001", "Ashik", "staff123", Users.Constants.STAFF, Users.Constants.STAFF_MAX_BOOK));
+        users.add(new Staff("SF3002", "Fathima", "staff123", Users.Constants.STAFF, Users.Constants.STAFF_MAX_BOOK));
+        users.add(new Student("ST2001", "Ajith", "student123", Users.Constants.STUDENT,
+                Users.Constants.STUDENT_MAX_BOOK));
+        users.add(new Student("ST2002", "Harsha", "student123", Users.Constants.STUDENT,
+                Users.Constants.STUDENT_MAX_BOOK));
+        users.add(new Student("ST203", "Nivetha", "student123", Users.Constants.STUDENT,
+                Users.Constants.STUDENT_MAX_BOOK));
 
         books.add(new Book("B1001", "Twilight", "Stephenie Meyer", 0));
         books.add(new Book("B1002", "Eclipse", "Stephenie Meyer", 5));
@@ -67,10 +71,23 @@ public class LibraryDatabase {
         return null;
     }
 
-    /**
-     * This is an util method to display the user details
-     */
-    public void displayUsers() {
+    public void displayStaff() {
+        String format = "%1$-15s%2$-20s";
+        System.out.println("-------------------------------");
+        System.out.println("All Staffs:");
+        System.out.println("-------------------------------");
+        System.out.format(format, "Staff ID", "Staff Name");
+        System.out.println();
+        for (Users user : users) {
+            if (user.userId.startsWith("SF")) {
+                System.out.format(format, user.userId, user.userName);
+                System.out.println();
+            }
+        }
+        System.out.println("-------------------------------");
+    }
+
+    public void displayStudent() {
         String format = "%1$-15s%2$-20s";
         System.out.println("-------------------------------");
         System.out.println("All Students:");
@@ -83,20 +100,6 @@ public class LibraryDatabase {
                 System.out.println();
             }
         }
-        System.out.println("-------------------------------");
-
-        System.out.println("All Staffs:");
-        System.out.println("-------------------------------");
-
-        System.out.format(format, "Staff ID", "Staff Name");
-        System.out.println();
-        for (Users user : users) {
-            if (user.userId.startsWith("SF")) {
-                System.out.format(format, user.userId, user.userName);
-                System.out.println();
-            }
-        }
-        System.out.println("-------------------------------");
     }
 
     // This method is used to display books details
@@ -115,9 +118,30 @@ public class LibraryDatabase {
 
     }
 
+    public boolean checkBookAvailability(Book book) {
+        if (book == null) { // checking if the BookID is valid
+            System.out.println("Please enter a valid Book ID!");
+            return false;
+
+        } else if (book.available == 0) { // checking whether the book is available for borrowing
+            System.out.println(
+                    "The book \"" + book.bookName + "\" is not available Today please try again after some days!");
+            return false;
+
+        }
+        return true;
+    }
+
     // This is an static method that returns the library instance
     public static LibraryDatabase getInstance() {
         return library;
+    }
+
+    public ArrayList<Users> getUsers(Users user) throws Exception {
+        if (user.userType != Users.Constants.LIBRARIAN) {
+            throw new Exception("You are not authenticated to access this data");
+        }
+        return users;
     }
 
 }
