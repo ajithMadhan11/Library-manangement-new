@@ -46,4 +46,4 @@ This app contains mainly two users,
 
 ## UML - Class diagram
 
-    ![class diagram -LMS](/uml diagram/LMS-class diagram.jpg)
+![class](/uml diagram/LMS-class diagram.jpg)
