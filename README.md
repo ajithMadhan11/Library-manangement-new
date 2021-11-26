@@ -46,4 +46,4 @@ This app contains mainly two users,
 
 ## UML - Class diagram
 
-    ![class diagram -LMS](https://github.com/ajithMadhan11/Library-manangement-new/blob/main/uml%20diagram/LMS-class%20diagram.jpg)
+    ![class diagram -LMS](https://raw.githubusercontent.com/ajithMadhan11/Library-manangement-new/main/uml%20diagram/LMS-class%20diagram.jpg)
