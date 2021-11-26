@@ -4,6 +4,12 @@ package src.models;
 import src.Borrower;
 import src.CONSTANTS;
 
+/**
+ * This is Student Model which inherits the properties of Borrower and Student
+ * have their userType as "STUDENT" and maxBooks represents the maximum number
+ * of books a Student can borrow from library (this differs from staff)
+ */
+
 public class Student extends Borrower {
 
     public Student(String userID, String name, String password, CONSTANTS type, int maxBooks) {
@@ -15,6 +21,10 @@ public class Student extends Borrower {
     }
 
     /**
+     * Fine amount is calculated differently for students and staffs. so this method
+     * implemented seperatly for both student and staff by overriding parent
+     * menthod.
+     * 
      * @Override This method overrides calculatefine method od parent.
      * @param days - number of days due to be calculated.
      * @return fine amount

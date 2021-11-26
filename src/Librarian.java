@@ -43,7 +43,7 @@ public class Librarian extends Users implements LibrarianServices {
     private void createStudent(String name, String pass) {
         LibraryDatabase lib = LibraryDatabase.getInstance();
         String userId = "ST" + LibraryDatabase.lastStudnetId++;
-        Student student = new Student(userId, name, pass, CONSTANTS.STUDENT, Users.Constants.STUDENT_MAX_BOOK);
+        Student student = new Student(userId, name, pass, CONSTANTS.STUDENT, Borrower.Constants.STUDENT_MAX_BOOK);
         try {
             lib.getUsers(this).add(student);
             System.out.println("Student has been created with the id : " + userId + "! ");
@@ -62,7 +62,7 @@ public class Librarian extends Users implements LibrarianServices {
     private void createStaff(String name, String pass) {
         LibraryDatabase lib = LibraryDatabase.getInstance();
         String userId = "SF" + LibraryDatabase.lastStaffId++;
-        Staff staff = new Staff(userId, name, pass, CONSTANTS.STAFF, Users.Constants.STAFF_MAX_BOOK);
+        Staff staff = new Staff(userId, name, pass, CONSTANTS.STAFF, Borrower.Constants.STAFF_MAX_BOOK);
         try {
             lib.getUsers(this).add(staff);
             System.out.println("Staff has been created with the id : " + userId + "! ");

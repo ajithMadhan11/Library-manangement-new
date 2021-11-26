@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import src.CONSTANTS;
 
+/**
+ * This model represents the book details, where available is the number of
+ * books available in the library and stock is the total number of stock of that
+ * book initially present.
+ */
 public class Book {
     public String bookId;
     public String bookName;
@@ -11,6 +16,7 @@ public class Book {
     public int available;
     private int stock;
 
+    // This arrayList contains the entire details
     public ArrayList<BorrowSlip> borrowlist = new ArrayList<BorrowSlip>();
 
     public Book(String id, String bName, String aName, int copies) {

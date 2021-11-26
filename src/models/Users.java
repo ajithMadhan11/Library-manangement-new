@@ -6,11 +6,6 @@ import src.CONSTANTS;
 
 public abstract class Users {
 
-    public static class Constants {
-        public static final int STUDENT_MAX_BOOK = 2;
-        public static final int STAFF_MAX_BOOK = 3;
-    }
-
     public String userId;
     public String userName;
     public CONSTANTS userType;

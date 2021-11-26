@@ -16,6 +16,8 @@ public class Library {
 
     LibraryDatabase library;
 
+    // Initaial instance of the libraryDatabase is created when library object is
+    // created
     Library() {
         library = LibraryDatabase.getInstance();
     }

@@ -10,8 +10,21 @@ import src.models.Users;
 import src.services.BorrowerServices;
 
 public abstract class Borrower extends Users implements BorrowerServices {
+
+    // These constants are used to define the number of maximum books that can be
+    // borrowed by students and staff
+    public static class Constants {
+        public static final int STUDENT_MAX_BOOK = 2;
+        public static final int STAFF_MAX_BOOK = 3;
+    }
+
+    // Fine amount data of borrower
     private int fine;
+
+    // Maximum number of books a borrower can borrow
     public int maxBooks;
+
+    // This arraylist contains the bookSlip of books borrowed by a borrower
     ArrayList<BorrowSlip> borrowlist = new ArrayList<BorrowSlip>();
 
     /**
@@ -35,7 +48,8 @@ public abstract class Borrower extends Users implements BorrowerServices {
     }
 
     /**
-     * This method is overloaded to borrow books
+     * This method is overloaded to borrow books If both Book and borrow instance is
+     * passed to this method it borrows book from library and returns the due date.
      * 
      * @param book     - book obj to borrow
      * @param borrower - the borrower obj
@@ -48,7 +62,6 @@ public abstract class Borrower extends Users implements BorrowerServices {
         borrower.borrowlist.add(borrow);
         book.borrowlist.add(borrow);
         return due;
-
     }
 
     /**
@@ -75,7 +88,9 @@ public abstract class Borrower extends Users implements BorrowerServices {
     }
 
     /**
-     * This method overloaded to return book to the library
+     * This method overloaded to return book to the library If both borrowSlip and
+     * libraryDatabase instance is passed to this method this returns the book to
+     * the libraryDatabase
      * 
      * @param borrow - borrow obj
      * @param lib    - library instance
@@ -89,7 +104,8 @@ public abstract class Borrower extends Users implements BorrowerServices {
         Book book = lib.getBook(borrow.bookId);
         // reverting the book status
         book.available++;
-        // remving from array
+        // removing from array
+        book.borrowlist.remove(borrow);
         this.borrowlist.remove(borrow);
 
     }
@@ -144,7 +160,7 @@ public abstract class Borrower extends Users implements BorrowerServices {
         return check;
     }
 
-    // This method is used to display borrowed books
+    // This method is used to display borrowed books by Borrower
     public void displayBorrowedBooks() {
         if (this.borrowlist.size() == 0) {
             System.out.print("-");

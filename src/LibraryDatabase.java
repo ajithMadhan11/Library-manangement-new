@@ -30,11 +30,13 @@ public class LibraryDatabase implements LibraryServices {
         users = new ArrayList<Users>();
         books = new ArrayList<Book>();
         users.add(new Librarian("LB1001", "Admin", "Admin", CONSTANTS.LIBRARIAN));
-        users.add(new Staff("SF3001", "Ashik", "staff123", CONSTANTS.STAFF, Users.Constants.STAFF_MAX_BOOK));
-        users.add(new Staff("SF3002", "Fathima", "staff123", CONSTANTS.STAFF, Users.Constants.STAFF_MAX_BOOK));
-        users.add(new Student("ST2001", "Ajith", "student123", CONSTANTS.STUDENT, Users.Constants.STUDENT_MAX_BOOK));
-        users.add(new Student("ST2002", "Harsha", "student123", CONSTANTS.STUDENT, Users.Constants.STUDENT_MAX_BOOK));
-        users.add(new Student("ST2003", "Nivetha", "student123", CONSTANTS.STUDENT, Users.Constants.STUDENT_MAX_BOOK));
+        users.add(new Staff("SF3001", "Ashik", "staff123", CONSTANTS.STAFF, Borrower.Constants.STAFF_MAX_BOOK));
+        users.add(new Staff("SF3002", "Fathima", "staff123", CONSTANTS.STAFF, Borrower.Constants.STAFF_MAX_BOOK));
+        users.add(new Student("ST2001", "Ajith", "student123", CONSTANTS.STUDENT, Borrower.Constants.STUDENT_MAX_BOOK));
+        users.add(
+                new Student("ST2002", "Harsha", "student123", CONSTANTS.STUDENT, Borrower.Constants.STUDENT_MAX_BOOK));
+        users.add(
+                new Student("ST2003", "Nivetha", "student123", CONSTANTS.STUDENT, Borrower.Constants.STUDENT_MAX_BOOK));
 
         books.add(new Book("B1001", "Twilight", "Stephenie Meyer", 0));
         books.add(new Book("B1002", "Eclipse", "Stephenie Meyer", 5));
