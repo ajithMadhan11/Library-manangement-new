@@ -11,5 +11,9 @@ public interface LibrarianServices {
 
     public void viewBookStat();
 
+    public void viewUserStat();
+
+    public void viewReport();
+
     public void changeStocks();
 }

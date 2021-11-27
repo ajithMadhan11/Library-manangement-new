@@ -212,7 +212,8 @@ public class Librarian extends Users implements LibrarianServices {
     }
 
     // This method is used by Admin to view user stats using their UserID
-    public void viewUserStat(LibraryDatabase lib) {
+    public void viewUserStat() {
+        LibraryDatabase lib = LibraryDatabase.getInstance();
         System.out.println("Enter userID to view userstats:");
         String uid = sc.nextLine();
         Users borrower = lib.getUser(uid);

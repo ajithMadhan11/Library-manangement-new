@@ -113,7 +113,7 @@ public class Library {
                     break;
                 case 7:
                     // to view user stats
-                    librarian.viewUserStat(library);
+                    librarian.viewUserStat();
                     break;
                 case 8:
                     // to generate report
