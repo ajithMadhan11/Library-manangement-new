@@ -211,6 +211,18 @@ public class Librarian extends Users implements LibrarianServices {
         System.out.println("-----------------------------------------------------------------------");
     }
 
+    // This method is used by Admin to view user stats using their UserID
+    public void viewUserStat(LibraryDatabase lib) {
+        System.out.println("Enter userID to view userstats:");
+        String uid = sc.nextLine();
+        Users borrower = lib.getUser(uid);
+        if (borrower != null) {
+            borrower.viewReport();
+            return;
+        }
+        System.out.println("Please enter a valid ID:");
+    }
+
     // This method is used to change the book stocks availablity
     public void changeStocks() {
         LibraryDatabase lib = LibraryDatabase.getInstance();

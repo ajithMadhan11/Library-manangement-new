@@ -8,8 +8,8 @@ import src.models.Users;
 public class Library {
 
     static String adminTemplate = "\n\nchoose from the following options\n\n" + "1:Add Student\n" + "2:Add Staff\n"
-            + "3:Remove user\n" + "4:Add Book\n" + "5:Alter book stock\n" + "6:view Book stats\n" + "7:view Report\n"
-            + "8:logout\n" + "9:exit\n";
+            + "3:Remove user\n" + "4:Add Book\n" + "5:Alter book stock\n" + "6:view Book stats\n"
+            + "7:view User stats\n" + "8:view Report\n" + "9:logout\n" + "10:exit\n";
     static String sTemplate = "\n\nchoose from the following options\n\n" + "1:Pay fine\n" + "2:Borrow book\n"
             + "3:Return Book\n" + "4:Renew Book\n" + "5:view my report\n" + "6:logout\n" + "7:Exit\n";
     static Scanner sc = new Scanner(System.in);
@@ -104,15 +104,22 @@ public class Library {
                     librarian.addBook();
                     break;
                 case 5:
+                    // to change book stock
                     librarian.changeStocks();
                     break;
                 case 6:
+                    // to view book stats
                     librarian.viewBookStat();
                     break;
                 case 7:
+                    // to view user stats
+                    librarian.viewUserStat(library);
+                    break;
+                case 8:
+                    // to generate report
                     librarian.viewReport();
                     break;
-                case 8: {
+                case 9: {
                     System.out.println("Do you really want to logout? y/n");
                     String userInput = sc.nextLine();
                     if ((userInput.equals("y") || userInput.equals("Y"))) {
@@ -123,7 +130,7 @@ public class Library {
                     }
                 }
                     break;
-                case 9: {
+                case 10: {
                     System.out.println("Do you really want to exit? y/n");
                     String userInput = sc.nextLine();
                     if ((userInput.equals("y") || userInput.equals("Y"))) {
@@ -164,16 +171,16 @@ public class Library {
             try {
                 switch (choice) {
                 case 1:
-                    staff.payFine(staff);
+                    staff.payFine();
                     break;
                 case 2:
-                    staff.borrowBook(staff, library);
+                    staff.borrowBook(library);
                     break;
                 case 3:
-                    staff.returnBook(staff, library);
+                    staff.returnBook(library);
                     break;
                 case 4:
-                    staff.renewBook(staff);
+                    staff.renewBook();
                     break;
                 case 5:
                     staff.viewReport();
@@ -230,16 +237,16 @@ public class Library {
             try {
                 switch (choice) {
                 case 1:
-                    student.payFine(student);
+                    student.payFine();
                     break;
                 case 2:
-                    student.borrowBook(student, library);
+                    student.borrowBook(library);
                     break;
                 case 3:
-                    student.returnBook(student, library);
+                    student.returnBook(library);
                     break;
                 case 4:
-                    student.renewBook(student);
+                    student.renewBook();
                     break;
                 case 5:
                     student.viewReport();

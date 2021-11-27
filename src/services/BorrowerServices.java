@@ -2,23 +2,22 @@ package src.services;
 
 import src.models.Book;
 import src.models.BorrowSlip;
-import src.Borrower;
 import src.LibraryDatabase;
 import java.time.LocalDate;
 
 public interface BorrowerServices {
-    public void borrowBook(Borrower borrower, LibraryDatabase lib);
+    public void borrowBook(LibraryDatabase lib);
 
-    public LocalDate borrowBook(Book book, Borrower borrower);
+    public LocalDate borrowBook(Book book);
 
-    public void returnBook(Borrower borrower, LibraryDatabase lib);
+    public void returnBook(LibraryDatabase lib);
 
     public void returnBook(BorrowSlip borrow, LibraryDatabase lib);
 
-    public void payFine(Borrower borrower);
+    public void payFine();
 
     public int calculateFine(long days);
 
-    public void renewBook(Borrower borrower);
+    public void renewBook();
 
 }

@@ -30,10 +30,9 @@ public abstract class Borrower extends Users implements BorrowerServices {
     /**
      * This method is used to borrow books from library database
      * 
-     * @param borrower -the borrower obj
-     * @param lib      - the library instance
+     * @param lib - the library instance
      */
-    public void borrowBook(Borrower borrower, LibraryDatabase lib) {
+    public void borrowBook(LibraryDatabase lib) {
 
         lib.displayBooks();
         System.out.println("Enter the BookID to Borrow :");
@@ -41,7 +40,7 @@ public abstract class Borrower extends Users implements BorrowerServices {
         Book book = lib.getBook(bookId);
 
         if (lib.checkBookAvailability(book) && canUserBorrowBook()) {
-            LocalDate due = borrowBook(book, borrower);
+            LocalDate due = borrowBook(book);
             System.out.println(
                     "Book " + book.bookName + " has been borrowed sucessfully please return it on or before " + due);
         }
@@ -51,33 +50,31 @@ public abstract class Borrower extends Users implements BorrowerServices {
      * This method is overloaded to borrow books If both Book and borrow instance is
      * passed to this method it borrows book from library and returns the due date.
      * 
-     * @param book     - book obj to borrow
-     * @param borrower - the borrower obj
+     * @param book - book obj to borrow
      */
-    public LocalDate borrowBook(Book book, Borrower borrower) {
+    public LocalDate borrowBook(Book book) {
         book.available--;
         LocalDate today = LocalDate.now();
         LocalDate due = today.plusDays(10);
-        BorrowSlip borrow = new BorrowSlip(book.bookId, borrower.userId, today, due);
-        borrower.borrowlist.add(borrow);
+        BorrowSlip borrow = new BorrowSlip(book.bookId, this.userId, today, due);
+        this.borrowlist.add(borrow);
         book.borrowlist.add(borrow);
         return due;
     }
 
     /**
      * This method helps to return book to the library
-     * 
-     * @param borrower - borrower obj
-     * @param lib      - library instance
+     *
+     * @param lib - library instance
      */
-    public void returnBook(Borrower borrower, LibraryDatabase lib) {
-        if (checkBorrowedBooks(borrower) != 1)
+    public void returnBook(LibraryDatabase lib) {
+        if (checkBorrowedBooks(this) != 1)
             return;
         System.out.println("\nEnter the BookID to Return :");
         String bookId = sc.nextLine();
-        for (BorrowSlip borrow : borrower.borrowlist) {
+        for (BorrowSlip borrow : this.borrowlist) {
             if (borrow.bookId.equals(bookId)) {
-                borrower.returnBook(borrow, lib);
+                this.returnBook(borrow, lib);
                 System.out.println("Book has been returned sucessfully!");
                 System.out.println("Your pending fine amount is ₹" + this.fine);
                 return;
@@ -115,7 +112,7 @@ public abstract class Borrower extends Users implements BorrowerServices {
      * 
      * @param borrower - the borrower obj
      */
-    public void payFine(Borrower borrower) {
+    public void payFine() {
         try {
             if (this.fine == 0) {
                 System.out.println("You don't have any pending fines! Thank you :) ");
@@ -176,8 +173,8 @@ public abstract class Borrower extends Users implements BorrowerServices {
      * 
      * @param borrower - the borrower obj
      */
-    public void renewBook(Borrower borrower) {
-        if (checkBorrowedBooks(borrower) != 1)
+    public void renewBook() {
+        if (checkBorrowedBooks(this) != 1)
             return;
         System.out.println("\nEnter the BookID to Renew :");
         String bookId = sc.nextLine();
