@@ -14,6 +14,7 @@ This app contains mainly two users,
 - Can add Books
 - Can view and update Book stock details
 - Can view stats of each individual book
+- Can view stats of each individual User
 - Can view the the report of entire Library
 
 ## Borrower (Staffs and Students)
